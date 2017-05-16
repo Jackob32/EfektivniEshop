@@ -1,0 +1,6 @@
+{
+  "name": "StateType",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./StateType.js"
+}

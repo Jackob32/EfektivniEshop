@@ -1,0 +1,27 @@
+// Here you can add other styles
+
+// Classes
+.show {
+  display: block !important;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+.invisible {
+  visibility: hidden;
+}
+
+.toast-top-right{
+  top: 20%;
+  z-index: 9 !important;
+}
+
+.ReactModal__Overlay--after-open{
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.react-bs-table-container .form-control {
+
+  width: 105%;
+}

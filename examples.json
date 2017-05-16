@@ -1,0 +1,49 @@
+
+//kategorie
+{
+  "_id": "59031b1b8f5e06be9cbcacf7",
+  "name": "kategorie",
+  "description": "Všechny kategorie",
+  "__v": 0,
+  "subcategories": [
+    {
+      "__v": 0,
+      "description": "Všechny druhy hraček",
+      "name": "Hračky",
+      "_id": "59031b1b8f5e06be9cbcacf7",
+      "subcategories": [
+        {
+          "_id": "59032a40124ad1be78326cb7",
+          "name": "Plyšové hračky",
+          "description": "Plyšáci",
+          "subcategories": []
+        },
+        {
+          "_id": "59032a40124ad1be78326cb6",
+          "name": "Stavebnice",
+          "description": "Lego mercur a další stavecbnice",
+          "subcategories": []
+        },
+        {
+          "_id": "59032a40124ad1be78326cb5",
+          "name": "Stolní hry a puzzle",
+          "description": "Stolní hry pro celou rodinu",
+          "subcategories": []
+        },
+        {
+          "_id": "59032a40124ad1be78326cb4",
+          "name": "Auta, vláčky, vrtulníky",
+          "description": "Hračky nejen na výstavku",
+          "subcategories": []
+        },
+        {
+          "_id": "59032a40124ad1be78326cb3",
+          "name": "Dětská odrážedla a koloběžky",
+          "description": "Dopravní prostředky pro ty nejmenší",
+          "subcategories": []
+        }
+      ]
+    }
+  ]
+}
+

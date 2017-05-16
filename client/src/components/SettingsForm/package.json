@@ -1,0 +1,6 @@
+{
+  "name": "SettingsForm",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./SettingsForm.js"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "TicketingForm",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TicketingForm.js"
+}

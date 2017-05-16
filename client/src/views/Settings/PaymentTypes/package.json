@@ -1,0 +1,6 @@
+{
+  "name": "PaymentType",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PaymentType.js"
+}
