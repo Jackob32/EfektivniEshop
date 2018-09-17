@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Line} from 'react-chartjs-2';
-import  MyFetch from '../../functions';
+import MyFetch from '../../functions';
 
 /*
 const brandPrimary =  '#20a8d8';
@@ -78,12 +78,12 @@ class LinesChart extends Component {
         });
     }
     handleInitialize() {
-        MyFetch(this.props.source+"/"+this.props.data+"/"+this.state.days).
-        then(data => {
+        MyFetch(this.props.source + "/" + this.props.data + "/" + this.state.days)
+            .then(data => {
             this.handleProcessData(data.items);
         }).catch(error => {
 
-            this.setState({error:"Chyba při načítání"});
+            this.setState({error: error});
         });
     }
     dateFormatter(cell) {
@@ -100,7 +100,7 @@ class LinesChart extends Component {
         from.setDate(from.getDate()-this.state.days);
 
                 for (let d = from; d <= to; d.setDate(d.getDate() + 1)) {
-                        if(data && data[i] &&  data[i]._id && data[i]._id.day ==  d.getDate() && data[i]._id.month == (d.getMonth()+1) && data[i]._id.year ==d.getFullYear()) {
+                    if (data && data[i] && data[i]._id && data[i]._id.day === d.getDate() && data[i]._id.month === (d.getMonth() + 1) && data[i]._id.year === d.getFullYear()) {
                       newdata.push(data[i].total);
                       i++;
                   }else {

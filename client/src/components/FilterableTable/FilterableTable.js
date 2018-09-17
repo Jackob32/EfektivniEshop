@@ -2,22 +2,9 @@ import React, {Component} from 'react';
 // in ECMAScript 6
 import {BootstrapTable, DeleteButton} from 'react-bootstrap-table';
 import MyFetch from '../../functions';
-import { Link } from 'react-router'
+import {Link} from 'react-router-dom'
 
-import {
-    /* reducer as formReducer,
-    formValueSelector,
-    Field,
-    reduxForm,
-    initialize,
-
-    stopSubmit,
-    startSubmit,
-    FieldArray,
-     FormSection, */
-    touched,
-    change
-} from 'redux-form'
+import {change, touched} from 'redux-form'
 
 let selectRowProp = {
     mode: "checkbox",

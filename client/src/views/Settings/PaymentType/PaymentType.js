@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import FilterTable  from './../../../components/FilterTable/FilterTable'
-import { Link } from 'react-router'
+import React, {Component} from 'react';
+import FilterTable from './../../../components/FilterTable/FilterTable'
+import {Link} from 'react-router'
 
 class Transports extends Component {
 

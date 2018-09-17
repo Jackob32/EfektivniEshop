@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import FilterableTable  from './../../components/FilterableTable/FilterableTable'
-import FilterTable  from './../../components/FilterTable/FilterTable'
-import { Link } from 'react-router'
+import React, {Component} from 'react';
+import FilterTable from './../../components/FilterTable/FilterTable'
+import {Link} from 'react-router-dom'
 import MyFetch from '../../functions';
+
 class Products extends Component {
 
     constructor(props) {
@@ -13,9 +13,9 @@ class Products extends Component {
             info: {},
             general: {}
         };
-        this.handleForm = this.handleForm.bind(this)
-        this.buttonFormatter = this.buttonFormatter.bind(this)
-        this.price = this.price.bind(this)
+        this.handleForm = this.handleForm.bind(this);
+        this.buttonFormatter = this.buttonFormatter.bind(this);
+        this.price = this.price.bind(this);
     }
 
     price(cell, row, enumObject) {
@@ -66,12 +66,12 @@ class Products extends Component {
 
     render() {
 
-        function bool(cell, row, enumObject) {
+        function bool(cell, row) {
             if(cell) return 'ANO';
             return 'NE';
         }
 
-        function ks(cell, row, enumObject) {
+        function ks(cell, row) {
 
             if(cell) return cell+' Ks';
         }

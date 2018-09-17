@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import FilterableTable  from './../../components/FilterableTable/FilterableTable'
-import FilterTable  from './../../components/FilterTable/FilterTable'
-import { Link } from 'react-router'
+import React, {Component} from 'react';
+import FilterTable from './../../components/FilterTable/FilterTable'
+import {Link} from 'react-router-dom'
 
 class Products extends Component {
     constructor(props) {
@@ -56,12 +55,14 @@ return row
             return cell.street+"  "+cell.number+"<br> "+cell.city+" <br> "+cell.zip;
 
         }
-        function dateFormatter(cell, row) {
+
+        function dateFormatter(cell) {
             cell=Date.parse(cell);
             cell=new Date(cell);
             return `${('0' + cell.getDate()).slice(-2)}.${('0' + (cell.getMonth() + 1)).slice(-2)}.${cell.getFullYear()}`;
         }
-        function userFormatter(cell, row) {
+
+        function userFormatter(cell) {
             cell=Date.parse(cell);
             cell=new Date(cell);
             return `${('0' + cell.getDate()).slice(-2)}.${('0' + (cell.getMonth() + 1)).slice(-2)}.${cell.getFullYear()}`;

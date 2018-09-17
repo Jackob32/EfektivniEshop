@@ -4,32 +4,16 @@ import 'react-select-plus/dist/react-select-plus.css';
 import Select from '../../../components/Forms/Select/Select';
 import TextArea from '../../../components/Forms/TextArea/TextArea';
 import Input from '../../../components/Forms/Input/Input';
-import Address from '../../../components/Address/Address';
 import ChangeForm from '../../../components/ChangeForm/';
-import FilterTable  from '../../../components/FilterTable/FilterTable'
-import MyFetch  from './../../../functions'
-import dateFormat from 'dateformat';
 import NewProps from '../../../components/Forms/Props/NewProps';
 import OldProps from '../../../components/Forms/Props/OldProps';
 
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import Categories from './../../../components/Categories/Categories'
 
 
-import {
-    formValueSelector,
-    Field,
-    reduxForm,
-    touched,
-    FormSection,
-    change,
-    FieldArray
-} from 'redux-form'
+import {Field, FieldArray, formValueSelector, reduxForm} from 'redux-form'
 
-let validateName = function (name) {
-    let re = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
-    return re.test(name)
-};
 class MyModal extends Component {
     constructor(props) {
         super(props);
@@ -157,32 +141,33 @@ function warn(values) {
         warnings.visible = 'Produkt nebude zveřejněn'
     }
     return warnings;
-};
+}
 
 class NewProduct extends Component {
 
     constructor(props) {
         super(props);
         let headline = "Upravení produktu";
-        if(this.props.params.id==null)
+        if (this.props.match.params.id == null)
             headline = "Nový produkt";
         this.state = {
             backspaceRemoves: true,
             multi: true,
             redirectToNewPage: false,
             headline: headline,
-            id: props.params.id
+            id: props.match.params.id
         };
     }
 
 
     render() {
-        const {OldPropsValues,values,fields,submitSucceeded, handleSubmit, pristine, reset, submitting, error, submitFailed } = this.props;
+        const {OldPropsValues} = this.props;
 
 
         return (
-            <ChangeForm  {...this.props} redirect="/products/" id={this.props.params.id} updateheadline="Upravení produktu"
-                        newheadline="Nový produkt" url="/api/products" formname="NewOrderForm">
+            <ChangeForm  {...this.props} redirect="/products/" id={this.props.match.params.id}
+                         updateheadline="Upravení produktu"
+                         newheadline="Nový produkt" url="/api/products" formname="NewOrderForm">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="card">
@@ -262,7 +247,7 @@ const Reform = reduxForm({
     form: 'NewProductForm',
     validate,
     warn
-})
+});
 
 const selector = formValueSelector('NewProductForm'); // <-- same as form name
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class Forms extends Component {
   render() {
@@ -656,11 +656,11 @@ class Forms extends Component {
                           <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action <span className="caret"></span>
                           </button>
                           <div className="dropdown-menu">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <a className="dropdown-item" href="#">Something else here</a>
+                              <a className="dropdown-item" href="">Action</a>
+                              <a className="dropdown-item" href="">Another action</a>
+                              <a className="dropdown-item" href="">Something else here</a>
                             <div role="separator" className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Separated link</a>
+                              <a className="dropdown-item" href="">Separated link</a>
                           </div>
                         </div>
                         <input type="text" id="input1-group3" name="input1-group3" className="form-control" placeholder="Username"/>
@@ -675,11 +675,11 @@ class Forms extends Component {
                           <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action <span className="caret"></span>
                           </button>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <a className="dropdown-item" href="#">Something else here</a>
+                              <a className="dropdown-item" href="">Action</a>
+                              <a className="dropdown-item" href="">Another action</a>
+                              <a className="dropdown-item" href="">Something else here</a>
                             <div role="separator" className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Separated link</a>
+                              <a className="dropdown-item" href="">Separated link</a>
                           </div>
                         </div>
                       </div>
@@ -693,11 +693,11 @@ class Forms extends Component {
                           <button type="button" className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"><span className="caret"></span>
                           </button>
                           <div className="dropdown-menu">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <a className="dropdown-item" href="#">Something else here</a>
+                              <a className="dropdown-item" href="">Action</a>
+                              <a className="dropdown-item" href="">Another action</a>
+                              <a className="dropdown-item" href="">Something else here</a>
                             <div role="separator" className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Separated link</a>
+                              <a className="dropdown-item" href="">Separated link</a>
                           </div>
                         </div>
                         <input type="text" id="input3-group3" name="input3-group3" className="form-control" placeholder=".."/>
@@ -705,11 +705,11 @@ class Forms extends Component {
                           <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span className="caret"></span>
                           </button>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <a className="dropdown-item" href="#">Something else here</a>
+                              <a className="dropdown-item" href="">Action</a>
+                              <a className="dropdown-item" href="">Another action</a>
+                              <a className="dropdown-item" href="">Something else here</a>
                             <div role="separator" className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Separated link</a>
+                              <a className="dropdown-item" href="">Separated link</a>
                           </div>
                         </div>
                       </div>
@@ -950,9 +950,9 @@ class Forms extends Component {
               <div className="card-header">
                 <i className="fa fa-edit"></i>Form Elements
                 <div className="card-actions">
-                  <a href="#" className="btn-setting"><i className="icon-settings"></i></a>
-                  <a href="#" className="btn-minimize"><i className="icon-arrow-up"></i></a>
-                  <a href="#" className="btn-close"><i className="icon-close"></i></a>
+                    <a href="" className="btn-setting"><i className="icon-settings"></i></a>
+                    <a href="" className="btn-minimize"><i className="icon-arrow-up"></i></a>
+                    <a href="" className="btn-close"><i className="icon-close"></i></a>
                 </div>
               </div>
               <div className="card-block">

@@ -10,7 +10,7 @@
 
 ;(function ($, window, document, undefined) {
 
-"use strict";
+    'use strict';
 
 window = (typeof window != 'undefined' && window.Math == Math)
   ? window
@@ -210,7 +210,7 @@ $.fn.nag = function(parameters) {
             }
             else {
               module.error(error.noCookieStorage);
-              return;
+
             }
           },
           get: function(key, value) {

@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
-import Select from './../../components/Forms/Select/Select';
-import TextArea from './../../components/Forms/TextArea/TextArea';
+
 import Input from './../../components/Forms/Input';
 
-import {
-    reducer as formReducer,
-    Field,
-    touched
-
-} from 'redux-form'
+import {Field, touched} from 'redux-form'
 
 class Address extends Component {
     constructor(props) {
@@ -16,22 +10,22 @@ class Address extends Component {
         this.toggle = this.toggle.bind(this);
         this.toggleShow = this.toggleShow.bind(this);
 
-        let collapse = !(this.props.onstart == null || this.props.onstart == "" || this.props.onstart == 'open')
-        if (this.props.onstart == "close") {
+        let collapse = !(this.props.onstart == null || this.props.onstart === "" || this.props.onstart === 'open');
+        if (this.props.onstart === "close") {
             collapse = true;
             this.props.onstart = "";
         }
 
         let editable=this.props.editable;
 
-        let dorucovaci=(this.props.name=="Doručovací adresa");
+        let dorucovaci = (this.props.name === "Doručovací adresa");
 
         let name=this.props.name;
         if(this.props.name==null)
             name="Adresa";
 
         let simple=false;
-        if(this.props.simple==true)
+        if (this.props.simple === true)
             simple=true;
 
         this.state = {
@@ -70,7 +64,7 @@ class Address extends Component {
               <div className="card-block">
 
                 <div className="card-block">
-                <div className={this.state.collapse && 'hidden'}>
+                    <div className={this.state.collapse === true ? 'hidden' : ''}>
                   <div className="row">
                       <Field name="firstname" label="" show={this.state.show}  component={Input} type="text"/>
                     &nbsp;
@@ -135,7 +129,7 @@ class Address extends Component {
             </div>
 
             <div className="card-block">
-              <div className={this.state.collapse && 'hidden'}>
+                <div className={this.state.collapse === true ? 'hidden' : ''}>
 
                 <div className="row">
                   <div className="col-sm-6 col-md-6 col-lg-6">

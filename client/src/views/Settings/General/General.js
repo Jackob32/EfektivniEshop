@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import 'react-select-plus/dist/react-select-plus.css';
 import Input from '../../../components/Forms/Input/Input';
-import {Field, reduxForm, startSubmit} from 'redux-form'
-import { SubmissionError } from 'redux-form';
-import  MyFetch from '../../../functions';
+import {Field, reduxForm, startSubmit, SubmissionError} from 'redux-form'
+import MyFetch from '../../../functions';
 
 function validate(values) {
     const errors = {};
@@ -62,8 +61,7 @@ function warn(values) {
      warnings.category = 'Opravdu chcete mít produkt bez kategorie?'
      }*/
     return warnings;
-};
-
+}
 const loadForm = data => ({type: 'LOAD', data});
 
 class BasicForm extends Component {
@@ -91,8 +89,8 @@ class BasicForm extends Component {
             method: 'PUT',
             body: JSON.stringify(values)
         };
-        return MyFetch('/api/settings/general',options).
-        then(data => {
+        return MyFetch('/api/settings/general', options)
+            .then(data => {
             //   stopSubmit("InfoForm");
             console.log(data);
         }).catch(error => {
@@ -105,8 +103,8 @@ class BasicForm extends Component {
     }
 
     handleInitialize() {
-        MyFetch('/api/settings/general').
-        then(data => {
+        MyFetch('/api/settings/general')
+            .then(data => {
             this.props.initialize(data);
             this.setState({connected: true});
         }).catch(error => {
@@ -169,7 +167,7 @@ const Reform = reduxForm({
     validate,
     warn,
     fields: ['language', 'currency', 'last', 'fee', 'overview', 'latest'],
-})
+});
 
 export default connect(
     state => ({

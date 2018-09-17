@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import 'react-select-plus/dist/react-select-plus.css';
-import {browserHistory} from 'react-router';
-import {stopSubmit, startSubmit} from 'redux-form'
-import {SubmissionError} from 'redux-form';
-import  MyFetch from '../../functions';
+import {Redirect} from 'react-router';
+import {startSubmit, stopSubmit, SubmissionError} from 'redux-form'
+import MyFetch from '../../functions';
 
 class ChangeForm extends Component {
     constructor(props) {
         super(props);
-
+        this.redirect = (this.props.redirect === 'undefined') ? false : true;
         let headline = this.props.updateheadline;
         if (this.props.id == null)
             headline = this.props.newheadline;
@@ -22,7 +21,7 @@ class ChangeForm extends Component {
         this.handleInitialize = this.handleInitialize.bind(this);
         this.submit = this.submit.bind(this);
         if (this.props.submitModifier)
-            this.submitModifier = this.props.submitModifier.bind(this)
+            this.submitModifier = this.props.submitModifier.bind(this);
         else
             this.submitModifier = this.submitModifier.bind(this)
     }
@@ -51,11 +50,12 @@ class ChangeForm extends Component {
         };
         return MyFetch(url, options).then(data => {
             stopSubmit(this.props.formname);
-            browserHistory.push(this.props.redirect);
+            this.setState({redirectToNewPage: true});
+
         }).catch(error => {
 
-            if(error.ok==false && error.status==500){
-                this.setState({globalerr:"Chyba připojení k serveru"});
+            if (error.ok == false && error.status == 500) {
+                this.setState({globalerr: "Chyba připojení k serveru"});
             }
 
             stopSubmit(this.props.formname);
@@ -83,20 +83,22 @@ class ChangeForm extends Component {
         let url = this.props.url + "/" + this.props.id;
         MyFetch(url)
             .then(data => {
-                if(!data){
-                    this.setState({globalerr:"Upravovaný objekt neexistuje"});
-                }     if(data.pairprop){
-                    data.pairprop.forEach(function(pair, index, arr) {
-                        if(pair)
-                            data.pairprop[index]={value: pair.value, ...pair._id};
-                    });}
+                if (!data) {
+                    this.setState({globalerr: "Upravovaný objekt neexistuje"});
+                }
+                if (data.pairprop) {
+                    data.pairprop.forEach(function (pair, index, arr) {
+                        if (pair)
+                            data.pairprop[index] = {value: pair.value, ...pair._id};
+                    });
+                }
                 this.props.initialize(data);
                 console.log(data);
             }).catch(error => {
-                if(error.ok==false && error.status==500){
-                    this.setState({globalerr:"Chyba připojení k serveru"});
-                }
-                    console.log(error);
+            if (error.ok == false && error.status == 500) {
+                this.setState({globalerr: "Chyba připojení k serveru"});
+            }
+            console.log(error);
             console.error(error.msg);
             throw new SubmissionError({
                 _error: error.msg
@@ -106,16 +108,18 @@ class ChangeForm extends Component {
 
     render() {
 
-        const {submitSucceeded,handleSubmit, pristine, reset, submitting, error, submitFailed} = this.props;
+        const {submitSucceeded, handleSubmit, pristine, reset, submitting, error, submitFailed} = this.props;
 
         return (
             <div className="animated fadeIn">
+
+                {this.state.redirectToNewPage && <Redirect to={this.props.redirect}/>}
 
                 <h2 className="d-print-none">{this.state.headline}</h2>
 
                 <div className="col-sm-12 col-md-12">
 
-                    {this.state.globalerr &&  <div className="card card-inverse card-danger">
+                    {this.state.globalerr && <div className="card card-inverse card-danger">
                         <div className="card-header"><strong>{this.state.globalerr}</strong></div>
                     </div>}
                     <div className="card card-accent-primary">
@@ -127,18 +131,18 @@ class ChangeForm extends Component {
 
                                 {error && <strong>{error}</strong>}
 
-                                <br />
+                                <br/>
 
                                 <div>
                                     {error && <div className="row"><strong>{error}</strong></div>}
                                     <div className="card-footer">
-                                        {!submitFailed &&  <button className="btn btn-sm btn-primary" type="submit"
-                                                                   disabled={pristine || submitting}>
+                                        {!submitFailed && <button className="btn btn-sm btn-primary" type="submit"
+                                                                  disabled={pristine || submitting}>
                                             {submitSucceeded && <i className="fa fa-check"></i>}
                                             Odeslat
                                         </button>}
-                                        {submitFailed &&   <button className="btn btn-sm btn-warning" type="submit"
-                                                                   disabled={pristine || submitting}>
+                                        {submitFailed && <button className="btn btn-sm btn-warning" type="submit"
+                                                                 disabled={pristine || submitting}>
                                             <i className="fa fa-warning"></i>
                                             Odeslat
                                         </button>}
@@ -148,7 +152,6 @@ class ChangeForm extends Component {
                                         </button>
                                     </div>
                                 </div>
-
 
 
                             </form>

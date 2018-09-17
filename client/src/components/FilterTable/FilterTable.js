@@ -1,30 +1,17 @@
 import React, {Component} from 'react';
 // in ECMAScript 6
 import {
-    SearchField,
-    InsertModalFooter,
-    customMultiSelect,
     BootstrapTable,
-    TableHeaderColumn,
-    DeleteButton
+    customMultiSelect,
+    DeleteButton,
+    InsertModalFooter,
+    SearchField,
+    TableHeaderColumn
 } from 'react-bootstrap-table';
 import MyFetch from '../../functions';
-import { Link } from 'react-router'
+import {Link} from 'react-router-dom'
 
-import {
-    /*  reducer as formReducer,
-    formValueSelector,
-    Field,
-    reduxForm,
-    initialize,
-    touched,
-    stopSubmit,
-    startSubmit,
-    FieldArray,
-    FormSection,
-     change*/
-    touched
-} from 'redux-form'
+import {touched} from 'redux-form'
 
 const selectRowProp = {
     mode: 'checkbox',
@@ -71,13 +58,13 @@ let createCustomToolBar = props => {
             </div>
     </div>
     );
-}
+};
 let handleDeleteButtonClick = (onClick) => {
     // Custom your onClick event here,
     // it's not necessary to implement this function if you have no any process before onClick
 
     onClick();
-}
+};
 let createCustomDeleteButton = (onClick) => {
 
     return (
@@ -88,13 +75,13 @@ let createCustomDeleteButton = (onClick) => {
             btnGlyphicon='glyphicon-edit'
             onClick={ () => handleDeleteButtonClick(onClick) }/>
     );
-}
+};
 let onRowClick = (row) => {
     // Custom your onClick event here,
     // it's not necessary to implement this function if you have no any process before onClick
 
 
-}
+};
 class FilterTable extends Component {
     constructor(props) {
         super(props);
@@ -185,7 +172,7 @@ let customNew=false;
                 </div>
             </div>
         );
-    }
+    };
     renderSizePerPageDropDown = props => {
         return (
             <div className='input-group-btn'>
@@ -200,7 +187,7 @@ let customNew=false;
                 }
             </div>
         );
-    }
+    };
     onExportToCSV(row) {
 
         if(this.opt && this.opt.CSV)
@@ -217,7 +204,7 @@ let customNew=false;
                 placeholder={ props.searchPlaceholder }/>
 
         );
-    }
+    };
 
     createCustomModalFooter = (closeModal, save) => {
         return (
@@ -245,14 +232,14 @@ let customNew=false;
         //     { ... }
         //   </InsertModalFooter>
         // );
-    }
+    };
 
     CustomInsert = (onClick) => {
         return (
             <Link to={this.opt.actionsURL+'new'}>
                 <button type="button" className="btn btn-info react-bs-table-add-btn ">{this.state.customNewText}</button>
             </Link>)
-    }
+    };
     componentWillReceiveProps(nextProps){
         this.setState({
             data:nextProps.data
@@ -410,7 +397,7 @@ let customNew=false;
 
     customConfirm(next, dropRowKeys) {
         const dropRowKeysStr = dropRowKeys.join(',');
-        if (confirm(`Opravdu chcete odstranit ${dropRowKeysStr}?`)) {
+        if (this.confirm(`Opravdu chcete odstranit ${dropRowKeysStr}?`)) {
             // If the confirmation is true, call the function that
             // continues the deletion of the record.
             next();

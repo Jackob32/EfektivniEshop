@@ -1,16 +1,12 @@
-
 import React, {Component} from 'react';
 import 'react-select-plus/dist/react-select-plus.css';
 
 
 class Input extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         const {show, disabled, input, label, type, meta: {touched, error, warning}}=this.props;
 
-        if(this.props.type=='date'){
+        if (type === 'date') {
             console.log(this.props.input.value);
         }
         let formstyle = "row form-group";
@@ -24,7 +20,7 @@ class Input extends Component {
             divStyle="col-md-9";
             labelStyle="col-md-3 form-control-label";
         }
-        if(label==""){
+        if (label === "") {
             divStyle="col-md-12";
         }
         if (touched && !error && !warning){
@@ -41,12 +37,14 @@ class Input extends Component {
         return (
 
             <div className={formstyle}>
-                {label!="" && <label className={labelStyle} htmlFor={label}>
+                {label !== "" && <label className={labelStyle} htmlFor={label}>
                     {label}
                 </label>}
                 <div className={divStyle}>
 
-                    {(show==null || show==true) ? <input {...this.props} className={controlstyle} {...input} placeholder={label} id={label} disabled={disabled}/>:<span>{input.value}</span>}
+                    {(show == null || show === true) ?
+                        <input {...this.props} className={controlstyle} {...input} placeholder={label} id={label}
+                               disabled={disabled}/> : <span>{input.value}</span>}
 
 
                     {touched &&

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router'
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 
 
 class Sidebar extends Component {
@@ -37,7 +37,7 @@ Přehled
             </li>
 
             <li className="nav-item">
-              <Link to={'/statistics'} className="nav-link" activeClassName="active">
+                <Link to={'/statistics'} className="nav-link" activeclassname="active">
                 <i className="fa fa-bar-chart fa-lg"/>
                 Statistiky
               </Link>
@@ -46,7 +46,7 @@ Přehled
               Prodej
             </li>
             <li className="nav-item">
-              <Link to={'/orders/'} className="nav-link" activeClassName="active">
+                <Link to={'/orders/'} className="nav-link" activeclassname="active">
                 <i className="fa fa-credit-card fa-lg"/>
                 Objednávky
               </Link>
@@ -54,13 +54,13 @@ Přehled
 
             </li>
             <li className="nav-item">
-              <Link to={'/products/'} className="nav-link" activeClassName="active">
+                <Link to={'/products/'} className="nav-link" activeclassname="active">
                 <i className="icon-basket"/>
                 Produkty
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={'/users/'} className="nav-link" activeClassName="active">
+                <Link to={'/users/'} className="nav-link" activeclassname="active">
                 <i className="fa fa-users fa-lg"/>
                 Zákazníci
               </Link>
@@ -74,30 +74,32 @@ Přehled
                   className="fa fa-wrench"/> Nastavení</a>
               <ul className="nav-dropdown-items">
                 <li className="nav-item">
-                  <Link to={'/settings/info'} className="nav-link" activeClassName="active"><i className="fa fa-gear "/>Informace</Link>
+                    <Link to={'/settings/info'} className="nav-link" activeclassname="active"><i
+                        className="fa fa-gear "/>Informace</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={'/settings/general'} className="nav-link" activeClassName="active"><i
+                    <Link to={'/settings/general'} className="nav-link" activeclassname="active"><i
                       className="fa fa-gear "/> Obecné</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={'/settings/props'} className="nav-link" activeClassName="active"><i className="fa fa-gear"/>
+                    <Link to={'/settings/props'} className="nav-link" activeclassname="active"><i
+                        className="fa fa-gear"/>
                     Parametry</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={'/settings/categories'} className="nav-link" activeClassName="active"><i
+                    <Link to={'/settings/categories'} className="nav-link" activeclassname="active"><i
                       className="fa fa-gear "/> Kategorie</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={'/settings/transports'} className="nav-link" activeClassName="active"><i
+                    <Link to={'/settings/transports'} className="nav-link" activeclassname="active"><i
                       className="fa fa-gear "/> Dopravci</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={'/settings/paymenttypes'} className="nav-link" activeClassName="active"><i
+                    <Link to={'/settings/paymenttypes'} className="nav-link" activeclassname="active"><i
                       className="fa fa-gear "/> Platební metody</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={'/settings/statetypes'} className="nav-link" activeClassName="active"><i
+                    <Link to={'/settings/statetypes'} className="nav-link" activeclassname="active"><i
                       className="fa fa-gear "/> Stavy Objednávek</Link>
                 </li>
               </ul>

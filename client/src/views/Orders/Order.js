@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import FilterTable  from './../../components/FilterTable/FilterTable'
-import { Link } from 'react-router'
+import React, {Component} from 'react';
+import FilterTable from './../../components/FilterTable/FilterTable'
+import {Link,} from 'react-router-dom';
 import MyFetch from '../../functions';
+
 class Products extends Component {
     constructor(props) {
         super(props);
@@ -58,9 +59,6 @@ class Products extends Component {
                     resArrVal.push(item._id);
                 });
                 this.setState({states: resArr, statesVal:resArrVal})
-
-                console.log(resArr);
-                console.log(resArrVal);
 
             }).catch(err => {
             this.forceUpdate();

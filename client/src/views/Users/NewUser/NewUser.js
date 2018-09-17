@@ -7,12 +7,7 @@ import Input from '../../../components/Forms/Input/Input';
 import ChangeForm from '../../../components/ChangeForm/';
 import Address from '../../../components/Address/Address';
 
-import {
-    Field,
-    reduxForm,
-    touched,
-    FormSection
-} from 'redux-form'
+import {Field, FormSection, reduxForm, touched} from 'redux-form'
 
 let validateEmail = function(email) {
     let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -72,7 +67,7 @@ class NewUser extends Component {
             backspaceRemoves: true,
             multi: true,
             redirectToNewPage: false,
-            id: this.props.params.id
+            id: this.props.match.params.id
         };
         this.submitModifier = this.submitModifier.bind(this)
     }
@@ -83,7 +78,7 @@ class NewUser extends Component {
     render() {
         return (
             <ChangeForm submitModifier={this.submitModifier}  {...this.props} redirect="/users/"
-                        id={this.props.params.id} updateheadline="Upravit Uživatele"
+                        id={this.props.match.params.id} updateheadline="Upravit Uživatele"
                         newheadline="Nový Uživatel" url="/api/users" formname="NewUserForm">
                 <div className="row">
                     <div className="col-sm-12 col-md-12 col-lg-6">
@@ -140,7 +135,7 @@ class NewUser extends Component {
         form: 'NewUserForm',
         validate,
         warn,
-    })
+    });
 
     export default connect(
     )(Reform(NewUser));
