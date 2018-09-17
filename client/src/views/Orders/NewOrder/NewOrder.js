@@ -15,13 +15,12 @@ import {change, Field, FormSection, formValueSelector, reduxForm, touched} from 
 
 let PrintTemplate = require('react-print');
 
-
-
 let validateName = function (name) {
     let re = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
     return re.test(name)
 };
 
+//Form validate function
 function validate(values) {
     const errors = {};
     if (!values.code) {
@@ -53,6 +52,9 @@ function validate(values) {
     }
     return errors;
 }
+
+//warn function
+//TODO finishh warn function
 function warn(values) {
     const warnings = {};
     /*
@@ -96,6 +98,7 @@ function warn(values) {
 class NewOrder extends Component {
     constructor(props) {
         super(props);
+        //set init state
         this.state = {
             print: "order",
             backspaceRemoves: true,
@@ -105,6 +108,7 @@ class NewOrder extends Component {
             info:null,
             general:null
         };
+        //bind
         this.submitModifier = this.submitModifier.bind(this);
         this.myOnchange = this.myOnchange.bind(this);
         this.handleForm = this.handleForm.bind(this);
@@ -260,8 +264,6 @@ class NewOrder extends Component {
         }
 
         //  this.props.dispatch(change('NewOrderForm', 'price', price));
-
-
         let startbilling = "";
 
         if (billingAddress && billingAddress.firstname) {
@@ -476,7 +478,6 @@ class NewOrder extends Component {
         )
     }
 }
-
 
 const Reform = reduxForm({
     form: 'NewOrderForm',

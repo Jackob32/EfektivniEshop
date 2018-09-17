@@ -13,6 +13,7 @@ class Products extends Component {
             info: {},
             general: {}
         };
+        //Bind all
         this.handleForm = this.handleForm.bind(this);
         this.buttonFormatter = this.buttonFormatter.bind(this);
         this.price = this.price.bind(this);
@@ -42,23 +43,23 @@ class Products extends Component {
             // console.log(error);
         });
     }
-    handleForm(FormData){
 
-    //    console.log(FormData);
-
+    handleForm(FormData) {
+        //    console.log(FormData);
     }
+
     toggle() {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
         });
     }
 
-    buttonFormatter(cell, row){
-    return (
-        <Link to={'/products/'+row._id}>
-            <button type="button" className="btn btn-success">upravit</button>
-        </Link>);
-}
+    buttonFormatter(cell, row) {
+        return (
+            <Link to={'/products/' + row._id}>
+                <button type="button" className="btn btn-success">upravit</button>
+            </Link>);
+    }
 
 
 //<TicketingForm />
@@ -67,29 +68,32 @@ class Products extends Component {
     render() {
 
         function bool(cell, row) {
-            if(cell) return 'ANO';
+            if (cell) return 'ANO';
             return 'NE';
         }
 
         function ks(cell, row) {
 
-            if(cell) return cell+' Ks';
+            if (cell) return cell + ' Ks';
         }
+
         function dateFormatter(cell, row) {
-            cell=Date.parse(cell);
-            cell=new Date(cell);
+            cell = Date.parse(cell);
+            cell = new Date(cell);
             return `${('0' + cell.getDate()).slice(-2)}/${('0' + (cell.getMonth() + 1)).slice(-2)}/${cell.getFullYear()}`;
         }
+
         function filterType(cell, row) {
             // just return type for filtering or searching.
-            if(cell) return 'ANO';
+            if (cell) return 'ANO';
             return 'NE';
         }
+
         function numberValidate(value, row) {
             if (isNaN(parseInt(value, 10))) {
                 return 'Cena musí být číslo!';
             }
-            if (value<0) {
+            if (value < 0) {
                 return 'Cena musí být kladná!';
             }
             return true;
@@ -97,33 +101,58 @@ class Products extends Component {
 
         let PRODUCTS = [
             {field: '_id', hidden: true, key: true, sort: true, label: 'Product ID'},
-            {field: 'name', width:'15%',filter: { type: 'TextFilter'}, sort: true, label: 'Název'},
-            {field: 'visible',width:'10%', filter: {selectText: 'Zvolit' , type: 'SelectFilter',
-                options: {
-                "false": "NE",
-                "true": "ANO"
-            }} ,
-                editable: { type: 'checkbox', options: { values:
-                    "0:1"
-                 }} ,
-                filterValue: filterType ,
-                sort: true, label: 'Viditelnost', dataFormat: bool},
-
-            {field: 'price', editable: { type: 'number', validator: numberValidate } ,width:'12%', filter: {  defaultValue: { comparator: '=' } , type: 'NumberFilter', numberComparators: [ '=', '>', '<' ]} ,
-                sort: true, label: 'Cena', dataFormat: this.price
+            {field: 'name', width: '15%', filter: {type: 'TextFilter'}, sort: true, label: 'Název'},
+            {
+                field: 'visible', width: '10%', filter: {
+                    selectText: 'Zvolit', type: 'SelectFilter',
+                    options: {
+                        "false": "NE",
+                        "true": "ANO"
+                    }
+                },
+                editable: {
+                    type: 'checkbox', options: {
+                        values:
+                            "0:1"
+                    }
+                },
+                filterValue: filterType,
+                sort: true, label: 'Viditelnost', dataFormat: bool
             },
-            {field: 'min_description', filter: {filterText: 'Filtrovat', type: 'TextFilter'},hidden: false,  sort: true, label: 'Apex'},
-            {field: 'date',  filter:{  type: 'DateFilter' },hidden: false,
-                editable: false ,
-                sort: true, label: 'Datum', dataFormat: dateFormatter},
-            {field: 'code', filter: {filterText: 'Filtrovat', type: 'TextFilter'},  sort: true, label: 'Kód'},
-            {field: 'count', width:'12%', editable: { type: 'number', validator: numberValidate } ,
-                filter: {  defaultValue: { comparator: '=' } , type: 'NumberFilter',
-                    numberComparators: [ '=', '>', '<' ]} ,
-                sort: true, label: 'Počet', dataFormat: ks}
+
+            {
+                field: 'price',
+                editable: {type: 'number', validator: numberValidate},
+                width: '12%',
+                filter: {defaultValue: {comparator: '='}, type: 'NumberFilter', numberComparators: ['=', '>', '<']},
+                sort: true,
+                label: 'Cena',
+                dataFormat: this.price
+            },
+            {
+                field: 'min_description',
+                filter: {filterText: 'Filtrovat', type: 'TextFilter'},
+                hidden: false,
+                sort: true,
+                label: 'Apex'
+            },
+            {
+                field: 'date', filter: {type: 'DateFilter'}, hidden: false,
+                editable: false,
+                sort: true, label: 'Datum', dataFormat: dateFormatter
+            },
+            {field: 'code', filter: {filterText: 'Filtrovat', type: 'TextFilter'}, sort: true, label: 'Kód'},
+            {
+                field: 'count', width: '12%', editable: {type: 'number', validator: numberValidate},
+                filter: {
+                    defaultValue: {comparator: '='}, type: 'NumberFilter',
+                    numberComparators: ['=', '>', '<']
+                },
+                sort: true, label: 'Počet', dataFormat: ks
+            }
         ];
 
-        let options =  {
+        let options = {
             modalNew: 'Nový dopravce',
             delete: true,
             key: true,
@@ -136,9 +165,8 @@ class Products extends Component {
         };
         return (
             <div className="animated fadeIn">
-
-                <FilterTable options={options} customNew={true} customNewText="Nový"  dataModel={PRODUCTS}  fetchUrl="/api/products/" submitFormAction={this.handleForm}/>
-
+                <FilterTable options={options} customNew={true} customNewText="Nový" dataModel={PRODUCTS}
+                             fetchUrl="/api/products/" submitFormAction={this.handleForm}/>
             </div>
         )
     }

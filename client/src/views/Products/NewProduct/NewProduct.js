@@ -20,8 +20,9 @@ class MyModal extends Component {
         this.state = {
             primary: false,
         };
-        this.togglePrimary= this.togglePrimary.bind(this);
+        this.togglePrimary = this.togglePrimary.bind(this);
     }
+
     toggle() {
         this.setState({
 
@@ -35,20 +36,24 @@ class MyModal extends Component {
             primary: !this.state.primary
         });
     }
+
     render() {
         return (
             <div>
                 <button className="btn btn-primary btn-md btn-block" onClick={this.togglePrimary}>
                     Upravit {this.props.name}</button>
 
-                <Modal isOpen={this.state.primary} toggle={this.togglePrimary} className={'modal-lg modal-primary ' + this.props.className}>
+                <Modal isOpen={this.state.primary} toggle={this.togglePrimary}
+                       className={'modal-lg modal-primary ' + this.props.className}>
                     <ModalHeader toggle={this.togglePrimary}>{this.props.headline}</ModalHeader>
                     <ModalBody>
                         {this.props.children}
                     </ModalBody>
                     <ModalFooter>
-                        {this.props.submit!="" &&  <a className="btn btn-primary"  color="primary" onClick={this.togglePrimary}>{this.props.submit}</a> }{' '}
-                        {this.props.cancel!="" && <a className="btn btn-secondary"  color="secondary" onClick={this.togglePrimary}>{this.props.cancel}</a>}
+                        {this.props.submit != "" && <a className="btn btn-primary" color="primary"
+                                                       onClick={this.togglePrimary}>{this.props.submit}</a>}{' '}
+                        {this.props.cancel != "" && <a className="btn btn-secondary" color="secondary"
+                                                       onClick={this.togglePrimary}>{this.props.cancel}</a>}
                     </ModalFooter>
                 </Modal>
             </div>
@@ -56,7 +61,7 @@ class MyModal extends Component {
     }
 }
 
-
+//validate function
 function validate(values) {
     const errors = {};
     if (!values.name) {
@@ -76,31 +81,32 @@ function validate(values) {
         errors.properties = 'Přidejte k produktu vlastnosti'
     }
 
-        if (!values.NewProps || !values.NewProps.length) {
+    if (!values.NewProps || !values.NewProps.length) {
 
-        } else {
-            const NewPropsArrayErrors = [];
-            values.NewProps.forEach((prop, propIndex) => {
-                const memberErrors = {};
-                if (!prop || !prop.name  ) {
-                    memberErrors.name = 'Vyplňte název nového parametru';
-                }
-                if (!prop || !prop.value ) {
-                    memberErrors.value = 'Vyplňte hodnotu parametru';
-                }
-                if (!prop || !prop.type ) {
-                    memberErrors.type = 'Vyplňte typ parametru';
-                }
-                NewPropsArrayErrors[propIndex] = memberErrors;
-            });
-            if (NewPropsArrayErrors.length) {
-                errors.NewProps = NewPropsArrayErrors;
+    } else {
+        const NewPropsArrayErrors = [];
+        values.NewProps.forEach((prop, propIndex) => {
+            const memberErrors = {};
+            if (!prop || !prop.name) {
+                memberErrors.name = 'Vyplňte název nového parametru';
             }
+            if (!prop || !prop.value) {
+                memberErrors.value = 'Vyplňte hodnotu parametru';
+            }
+            if (!prop || !prop.type) {
+                memberErrors.type = 'Vyplňte typ parametru';
+            }
+            NewPropsArrayErrors[propIndex] = memberErrors;
+        });
+        if (NewPropsArrayErrors.length) {
+            errors.NewProps = NewPropsArrayErrors;
         }
+    }
 
     return errors;
 }
 
+//warn function
 function warn(values) {
 
     const warnings = {};
@@ -163,7 +169,6 @@ class NewProduct extends Component {
     render() {
         const {OldPropsValues} = this.props;
 
-
         return (
             <ChangeForm  {...this.props} redirect="/products/" id={this.props.match.params.id}
                          updateheadline="Upravení produktu"
@@ -201,7 +206,8 @@ class NewProduct extends Component {
                                         <Field name="price" type="number" component={Input} label="Cena"/>
                                     </div>
                                     <div className="col-md-6">
-                                        <Field name="visible" value="visible" type="checkbox" component={Input} label="Zveřejnit"/>
+                                        <Field name="visible" value="visible" type="checkbox" component={Input}
+                                               label="Zveřejnit"/>
                                     </div>
                                 </div>
 
@@ -209,17 +215,17 @@ class NewProduct extends Component {
                                     <div className="col-md-12">
                                         <Field name="category" type="text" component={Select} url="/api/categories"
                                                dataform={{valueKey: "_id", labelKey: "title"}}
-                                               label="Kategorie" />
+                                               label="Kategorie"/>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-12">
-                                        <MyModal submit="" cancel="Zavřít" name="Kategorie"  headline="Kategorie">
-                                            <Categories />
+                                        <MyModal submit="" cancel="Zavřít" name="Kategorie" headline="Kategorie">
+                                            <Categories/>
                                         </MyModal>
                                     </div>
                                 </div>
-                                <br />
+                                <br/>
                                 <div className="row">
                                     <div className="col-md-12">
                                         <Field name="related" type="text" component={Select} url="/api/products"
@@ -233,9 +239,9 @@ class NewProduct extends Component {
 
                 </div>
 
-                <FieldArray OldPropsValues={OldPropsValues} name="pairprop" component={OldProps} />
+                <FieldArray OldPropsValues={OldPropsValues} name="pairprop" component={OldProps}/>
 
-                <FieldArray name="NewProps" component={NewProps} />
+                <FieldArray name="NewProps" component={NewProps}/>
 
             </ChangeForm>
         )

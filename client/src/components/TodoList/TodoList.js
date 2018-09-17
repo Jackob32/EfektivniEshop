@@ -20,10 +20,10 @@ const styles = {
         marginBottom: '0',
         marginTop: '0'
     }
-}
+};
 
 // component that holds each todo text
-class TodoBox extends Component {
+export class TodoBox extends Component {
     // constructor
     constructor(props) {
         super(props);
@@ -69,15 +69,15 @@ class TodoBox extends Component {
 
 
 // component that holds our list
-class TodoList extends React.Component {
+export class TodoList extends React.Component {
 
     // constructor of the class/component
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             todos: []
-        }
+        };
 
         // we do this so we can use the keyword `this` inside our functions correctly
         this.loadList = this.loadList.bind(this);
@@ -105,14 +105,14 @@ class TodoList extends React.Component {
 
     // handles the user submitting a todo text
     handleSubmit(event) {
-        let todo = this.inputElement.value
+        let todo = this.inputElement.value;
 
         // makes sure the todo is not empty
         // db data should never be empty
         if (todo)
             fetch('save/' + todo).then(response => {
                 console.log('saved');
-            })
+            });
 
         // loads the list again to update the UI
         this.loadList();
@@ -125,10 +125,10 @@ class TodoList extends React.Component {
 
     // handles the user clicking the remove button
     handleButton(event) {
-        let deleteTodo = event.target.value
+        let deleteTodo = event.target.value;
         fetch('remove/' + deleteTodo).then(resp => {
             console.log('removed');
-        })
+        });
         // loads the list again to update the UI
         this.loadList();
         event.preventDefault();
@@ -136,7 +136,7 @@ class TodoList extends React.Component {
 
     // Main rendering function
     render() {
-        let {todos} = this.state
+        let {todos} = this.state;
         let completedtodos = todos.filter(todo => todo.completed);
         todos = todos.filter(todo => !todo.completed);
         return <div>
@@ -168,61 +168,6 @@ class TodoList extends React.Component {
     }
 }
 
-/*
-componentWillMount() {
-    fetch('/monsters')
-        .then(res => res.json())
-        .then(data => {
-            this.setState({  monsters: data });
-        })
-}
 
-
-handleAddMonster(newMonster) {
-    fetch('/monsters', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newMonster)
-    })
-        .then(res => res.json())
-        .then(monster => {
-            this.setState({
-                monsters: this.state.monsters.concat(monster)
-            });
-        });
-}
-
-*/
-/*
-
- import React, { Component } from 'react';
- import './App.css';
-
- class App extends Component {
- state = {users: []}
-
- componentDidMount() {
- fetch('/users')
- .then(res => res.json())
- .then(users => this.setState({ users }));
- }
-
- render() {
- return (
- <div className="App">
- <h1>Users</h1>
- {this.state.users.map(user =>
- <div key={user.id}>{user.username}</div>
- )}
- </div>
- );
- }
- }
-
- export default App;
-
-* */
 
 export default TodoList;

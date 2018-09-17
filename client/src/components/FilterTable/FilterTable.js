@@ -1,3 +1,4 @@
+//Packages Import
 import React, {Component} from 'react';
 // in ECMAScript 6
 import {
@@ -8,10 +9,14 @@ import {
     SearchField,
     TableHeaderColumn
 } from 'react-bootstrap-table';
-import MyFetch from '../../functions';
+
 import {Link} from 'react-router-dom'
 
 import {touched} from 'redux-form'
+//Funsctions import
+import MyFetch from '../../functions';
+
+//Funsction definitions
 
 const selectRowProp = {
     mode: 'checkbox',
@@ -23,42 +28,40 @@ let createCustomToolBar = props => {
      *  This function only pass one argument, is props object which has following properties
      *
      *  {
-   *    components: {  // here are all the components
-   *      exportCSVBtn,  // export CSV button JSX
-   *      insertBtn,  // insert button JSX
-   *      deleteBtn,  // delete button JSX
-   *      showSelectedOnlyBtn,  // show selected button JSX
-   *      searchPanel,  // search panel JSX
-   *      btnGroup,  // button groups JSX
-   *      searchField,  // search field JSX
-   *      clearBtn  // clear search field JSX
-   *    },
-   *    event: {  // here are all the related event you may use it
-   *      openInsertModal,   // call it to open insert modal
-   *      closeInsertModal,  // call it to close insert modal
-   *      dropRow,   // call it to drop row
-   *      showOnlyToogle,   // call it to toogle show only selections
-   *      exportCSV,   // call it to export CSV file
-   *      search  // call it with search text to search table
-   *    }
-   *  }
+     *    components: {  // here are all the components
+     *      exportCSVBtn,  // export CSV button JSX
+     *      insertBtn,  // insert button JSX
+     *      deleteBtn,  // delete button JSX
+     *      showSelectedOnlyBtn,  // show selected button JSX
+     *      searchPanel,  // search panel JSX
+     *      btnGroup,  // button groups JSX
+     *      searchField,  // search field JSX
+     *      clearBtn  // clear search field JSX
+     *    },
+     *    event: {  // here are all the related event you may use it
+     *      openInsertModal,   // call it to open insert modal
+     *      closeInsertModal,  // call it to close insert modal
+     *      dropRow,   // call it to drop row
+     *      showOnlyToogle,   // call it to toogle show only selections
+     *      exportCSV,   // call it to export CSV file
+     *      search  // call it with search text to search table
+     *    }
+     *  }
      *
      **/
 
     return (
         <div style={{margin: "5px"}}>
-
-
             <div className='float-left col-xs-6 col-sm-6 col-md-6 col-lg-6'>
-
-            { props.components.btnGroup }
+                {props.components.btnGroup}
             </div>
             <div className='float-right col-xs-6 col-sm-6 col-md-6 col-lg-6'>
-                { props.components.searchPanel }
+                {props.components.searchPanel}
             </div>
-    </div>
+        </div>
     );
 };
+
 let handleDeleteButtonClick = (onClick) => {
     // Custom your onClick event here,
     // it's not necessary to implement this function if you have no any process before onClick
@@ -73,7 +76,7 @@ let createCustomDeleteButton = (onClick) => {
             btnContextual='btn-warning'
             className='my-custom-class'
             btnGlyphicon='glyphicon-edit'
-            onClick={ () => handleDeleteButtonClick(onClick) }/>
+            onClick={() => handleDeleteButtonClick(onClick)}/>
     );
 };
 let onRowClick = (row) => {
@@ -82,92 +85,17 @@ let onRowClick = (row) => {
 
 
 };
-class FilterTable extends Component {
-    constructor(props) {
-        super(props);
-let customNew=false;
 
-        if(this.props.customNew!=null){
-            customNew=this.CustomInsert;
-        }
-        let data=[];
-        if(this.props.data)
-            data=this.props.data;
 
-        this.state={
-            data:data,
-            offline: this.props.fetchUrl==null,
-            simple: this.props.simple!=null,
-            customNew:customNew,
-            customNewText:this.props.customNewText,
-            globalerr: null
-        };
-
-        this.onDeleteRow = this.onDeleteRow.bind(this);
-        this.createCustomModalHeader = this.createCustomModalHeader.bind(this);
-        this.handleModalClose = this.handleModalClose.bind(this);
-        this.beforeClose = this.beforeClose.bind(this);
-        this.handleInsertedRow = this.handleInsertedRow.bind(this);
-        this.onBeforeSaveCell = this.onBeforeSaveCell.bind(this);
-        this.onAfterSaveCell = this.onAfterSaveCell.bind(this);
-        this.handleinitialize = this.handleinitialize.bind(this);
-        this.handledelete = this.handledelete.bind(this);
-        this.handleupdate = this.handleupdate.bind(this);
-        this.editable = this.editable.bind(this);
-        this.customConfirm = this.customConfirm.bind(this);
-        this.createCustomModalFooter = this.createCustomModalFooter.bind(this);
-        this.renderPaginationPanel = this.renderPaginationPanel.bind(this);
-        this.renderSizePerPageDropDown = this.renderSizePerPageDropDown.bind(this);
-
-        this.CustomInsert = this.CustomInsert.bind(this);
-        this.createCustomSearchField = this.createCustomSearchField.bind(this);
-        this.onExportToCSV = this.onExportToCSV.bind(this);
-
-        this.opt=this.props.options;
-
-        let insertBtn=null;
-        if(this.state.customNew)
-        insertBtn=this.state.customNew;
-
-        this.options = {
-            insertModalFooter: this.createCustomModalFooter,
-          //  onExportToCSV: this.onExportToCSV,
-            searchPosition: 'right',
-            searchField: this.createCustomSearchField,
-            exportCSVText: 'Exportovat',
-            insertText: 'Nový',
-            deleteText: 'Odstranit',
-            saveText: 'Uložit',
-            closeText: 'Zavřít',
-            handleConfirmDeleteRow: this.customConfirm,
-            toolBar: createCustomToolBar,
-            deleteBtn: createCustomDeleteButton,
-            onRowClick: onRowClick,
-            onDeleteRow: this.onDeleteRow,
-            insertModalHeader: this.createCustomModalHeader,
-            onAddRow: this.handleInsertedRow,
-        //    defaultSortName: (this.opt==null || this.opt.sortname == null) ? "name" : this.opt.sortname,  // default sort column name
-            defaultSortOrder: 'desc',  // default sort order
-            insertBtn: insertBtn,
-            paginationPanel: this.renderPaginationPanel,
-            sizePerPageDropDown: this.renderSizePerPageDropDown
-        };
-        this.cellEditProp = {
-            mode: 'click',
-            blurToSave: true,
-            beforeSaveCell: this.onBeforeSaveCell, // a hook for before saving cell
-            afterSaveCell: this.onAfterSaveCell,  // a hook for after saving cell
-            // nonEditableRows: this.props.editable || this.editable
-        };
-    }
+export class FilterTable extends Component {
 
     renderPaginationPanel = (props) => {
         return (
             <div>
-                <div className="pagination">{ props.components.pageList }</div>
+                <div className="pagination">{props.components.pageList}</div>
                 <div className="input-group-btn">
                     <div>
-                        { props.components.sizePerPageDropdown }
+                        {props.components.sizePerPageDropdown}
                     </div>
                 </div>
             </div>
@@ -180,32 +108,23 @@ let customNew=false;
                     [10, 25, 50, 100].map((n, idx) => {
                         const isActive = (n === props.currSizePerPage) ? 'active' : null;
                         return (
-                            <button key={ idx } type='button' className={ `btn btn-info ${isActive}` }
-                                    onClick={ () => props.changeSizePerPage(n) }>{ n }</button>
+                            <button key={idx} type='button' className={`btn btn-info ${isActive}`}
+                                    onClick={() => props.changeSizePerPage(n)}>{n}</button>
                         );
                     })
                 }
             </div>
         );
     };
-    onExportToCSV(row) {
-
-        if(this.opt && this.opt.CSV)
-        return this.opt.CSV(row);
-
-        return row; // must return the data which you want to be exported
-    }
-
     createCustomSearchField = (props) => {
         return (
             <SearchField
                 className="form-control"
-                defaultValue={ props.defaultSearch }
-                placeholder={ props.searchPlaceholder }/>
+                defaultValue={props.defaultSearch}
+                placeholder={props.searchPlaceholder}/>
 
         );
     };
-
     createCustomModalFooter = (closeModal, save) => {
         return (
             <InsertModalFooter
@@ -233,42 +152,156 @@ let customNew=false;
         //   </InsertModalFooter>
         // );
     };
-
     CustomInsert = (onClick) => {
         return (
-            <Link to={this.opt.actionsURL+'new'}>
-                <button type="button" className="btn btn-info react-bs-table-add-btn ">{this.state.customNewText}</button>
+            <Link to={this.opt.actionsURL + 'new'}>
+                <button type="button"
+                        className="btn btn-info react-bs-table-add-btn ">{this.state.customNewText}</button>
             </Link>)
     };
-    componentWillReceiveProps(nextProps){
-        this.setState({
-            data:nextProps.data
+
+    constructor(props) {
+        super(props);
+
+        //Derive from props
+        let customNew = false;
+
+        if (this.props.customNew != null) {
+            customNew = this.CustomInsert;
+        }
+        let data = [];
+        if (this.props.data)
+            data = this.props.data;
+
+        //set init state
+        this.state = {
+            data: data,
+            offline: this.props.fetchUrl == null,
+            simple: this.props.simple != null,
+            customNew: customNew,
+            customNewText: this.props.customNewText,
+            globalerr: null
+        };
+
+        this.opt = this.props.options;
+
+        let insertBtn = null;
+        if (this.state.customNew)
+            insertBtn = this.state.customNew;
+
+        this.options = {
+            insertModalFooter: this.createCustomModalFooter,
+            //  onExportToCSV: this.onExportToCSV,
+            searchPosition: 'right',
+            searchField: this.createCustomSearchField,
+            exportCSVText: 'Exportovat',
+            insertText: 'Nový',
+            deleteText: 'Odstranit',
+            saveText: 'Uložit',
+            closeText: 'Zavřít',
+            handleConfirmDeleteRow: this.customConfirm,
+            toolBar: createCustomToolBar,
+            deleteBtn: createCustomDeleteButton,
+            onRowClick: onRowClick,
+            onDeleteRow: this.onDeleteRow,
+            insertModalHeader: this.createCustomModalHeader,
+            onAddRow: this.handleInsertedRow,
+            //    defaultSortName: (this.opt==null || this.opt.sortname == null) ? "name" : this.opt.sortname,  // default sort column name
+            defaultSortOrder: 'desc',  // default sort order
+            insertBtn: insertBtn,
+            paginationPanel: this.renderPaginationPanel,
+            sizePerPageDropDown: this.renderSizePerPageDropDown
+        };
+        this.cellEditProp = {
+            mode: 'click',
+            blurToSave: true,
+            beforeSaveCell: this.onBeforeSaveCell, // a hook for before saving cell
+            afterSaveCell: this.onAfterSaveCell,  // a hook for after saving cell
+            // nonEditableRows: this.props.editable || this.editable
+        };
+
+        //Bind all
+        this.onDeleteRow = this.onDeleteRow.bind(this);
+        this.createCustomModalHeader = this.createCustomModalHeader.bind(this);
+        this.handleModalClose = this.handleModalClose.bind(this);
+        this.beforeClose = this.beforeClose.bind(this);
+        this.handleInsertedRow = this.handleInsertedRow.bind(this);
+        this.onBeforeSaveCell = this.onBeforeSaveCell.bind(this);
+        this.onAfterSaveCell = this.onAfterSaveCell.bind(this);
+        this.handleinitialize = this.handleinitialize.bind(this);
+        this.handledelete = this.handledelete.bind(this);
+        this.handleupdate = this.handleupdate.bind(this);
+        this.editable = this.editable.bind(this);
+        this.customConfirm = this.customConfirm.bind(this);
+        this.createCustomModalFooter = this.createCustomModalFooter.bind(this);
+        this.renderPaginationPanel = this.renderPaginationPanel.bind(this);
+        this.renderSizePerPageDropDown = this.renderSizePerPageDropDown.bind(this);
+
+        this.CustomInsert = this.CustomInsert.bind(this);
+        this.createCustomSearchField = this.createCustomSearchField.bind(this);
+        this.onExportToCSV = this.onExportToCSV.bind(this);
+
+    }
+
+    handleinitialize() {
+        let url = this.props.fetchUrl;
+
+        MyFetch(url)
+            .then(data => {
+                if (data.user != null) {
+                    data.fullname = data.user.firstname + " " + data.user.lastname;
+                }
+
+                if (data)
+                    this.setState({data: data})
+            }).catch(error => {
+
+            if (error.ok == false && error.status == 500) {
+                this.setState({globalerr: "Chyba připojení k serveru"});
+            }
+
+            this.forceUpdate();
         });
     }
+
+    onExportToCSV(row) {
+        if (this.opt && this.opt.CSV)
+            return this.opt.CSV(row);
+        return row; // must return the data which you want to be exported
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            data: nextProps.data
+        });
+    }
+
     editable() {
         return ['price', 'deliverytime'];
     }
+
     onBeforeSaveCell(row, cellName, cellValue) {
         row[cellName] = cellValue;
-        if(this.state.offline) {
+        if (this.state.offline) {
             return true;
-        }else{
-        return this.handleupdate(row);
-    }
+        } else {
+            return this.handleupdate(row);
+        }
         // You can do any validation on here for editing value,
         // return false for reject the editing
     }
+
     onAfterSaveCell(row, cellName, cellValue) {
-       let data=this.state.data;
-        data.forEach(function(obj) {
+        let data = this.state.data;
+        data.forEach(function (obj) {
             if (obj._id === row._id) {
-                obj.name=row.name;
+                obj.name = row.name;
             }
         });
 
 
-        if(this.state.offline) {
-           // this.props.dispatch(change('NewOrderForm', 'products', data));
+        if (this.state.offline) {
+            // this.props.dispatch(change('NewOrderForm', 'products', data));
             return true;
         }
         /*  let rowStr = '';
@@ -278,34 +311,40 @@ let customNew=false;
          alert('Thw whole row :\n' + rowStr+'was updated');*/
         //Napsat hlasku ze byla updatovana
     }
+
     handleModalClose(closeModal) {
         // Custom your onCloseModal event here,
         // it's not necessary to implement this function if you have no any process before modal close
         console.log('This is my custom function for modal close event');
         closeModal();
     }
+
     beforeClose(e) {
         alert(`[Custom Event]: Before modal close event triggered!`);
     }
+
     createCustomModalHeader(onClose, onSave) {
         return (
             <div className='modal-header'>
                 <h4 className="modal-title">{this.props.options.modalNew}</h4>
-                <button type="button" className="close" aria-label="Close" onClick={ onClose }>
+                <button type="button" className="close" aria-label="Close" onClick={onClose}>
                     <span aria-hidden="true">×</span></button>
             </div>
         );
 
     }
+
     onDeleteRow(rows) {
         rows.forEach((id) => {
             this.handledelete(id);
         });
     }
+
     componentDidMount() {
-        if(!this.state.offline)
-        this.handleinitialize();
+        if (!this.state.offline)
+            this.handleinitialize();
     }
+
     handledelete(values) {
         var headers = new Headers({
             'Accept': 'application/json',
@@ -328,26 +367,7 @@ let customNew=false;
             this.forceUpdate();
         });
     }
-    handleinitialize() {
-        let url = this.props.fetchUrl;
 
-        MyFetch(url)
-            .then(data => {
-                if(data.user!=null){
-                    data.fullname=data.user.firstname+" "+data.user.lastname;
-                }
-
-                if(data)
-                this.setState({data: data})
-            }).catch(error => {
-
-            if(error.ok==false && error.status==500){
-                this.setState({globalerr:"Chyba připojení k serveru"});
-            }
-
-            this.forceUpdate();
-        });
-    }
     handleInsertedRow(values) {
         var headers = new Headers({
             'Accept': 'application/json',
@@ -368,6 +388,7 @@ let customNew=false;
         });
 
     }
+
     handleupdate(values) {
         let url = this.props.fetchUrl + values._id;
         let method = 'PUT';
@@ -381,6 +402,7 @@ let customNew=false;
             return false;
         });
     }
+
     trClassFormat(row, rowIndex) {
         // row is the current row data
         if (row.min_description === "") {
@@ -403,11 +425,12 @@ let customNew=false;
             next();
         }
     }
+
     render() {
+
+        //generate columns
         let cols = [];
         this.props.dataModel.forEach((item) => {
-
-
             cols.push(
                 <TableHeaderColumn
                     key={item.label}
@@ -420,24 +443,24 @@ let customNew=false;
                     dataFormat={item.dataFormat}
                     width={item.width}
                     filter={item.filter}
-                    filterValue={ item.filterType }
+                    filterValue={item.filterType}
                     filterFormatted={item.filterFormatted}
                     formatExtraData={item.formatExtraData}
-
                 >
                     {item.label}
                 </TableHeaderColumn>
             );
         });
 
-        function buttonFormatter(cell, row){
-                return (
+        function buttonFormatter(cell, row) {
+            return (
 
-            <Link to={this.opt.actionsURL+row._id}>
-                <button type="button" className="btn btn-success">upravit</button>
-            </Link>);
+                <Link to={this.opt.actionsURL + row._id}>
+                    <button type="button" className="btn btn-success">upravit</button>
+                </Link>);
         }
-        if(this.opt && this.opt.actions) {
+
+        if (this.opt && this.opt.actions) {
             cols.push(
                 <TableHeaderColumn
                     key="akce"
@@ -447,7 +470,7 @@ let customNew=false;
                     dataSort={true}
                     hidden={false}
                     editable={false}
-                    dataFormat={this.opt.actionsFormatter == null ? buttonFormatter :this.opt.actionsFormatter}
+                    dataFormat={this.opt.actionsFormatter == null ? buttonFormatter : this.opt.actionsFormatter}
                 >
                     Akce
                 </TableHeaderColumn>
@@ -458,18 +481,15 @@ let customNew=false;
                 <div className="row">
                     <div className="col-lg-12">
 
-
-
-                        {this.state.globalerr &&  <div className="card card-inverse card-danger">
+                        {this.state.globalerr && <div className="card card-inverse card-danger">
                             <div className="card-header"><strong>{this.state.globalerr}</strong></div>
                         </div>}
                         {!this.state.globalerr &&
                         <div className="card">
-
                             <BootstrapTable
-                                cellEdit={ this.cellEditProp }
+                                cellEdit={this.cellEditProp}
                                 data={this.state.data}
-                                selectRow={selectRowProp }
+                                selectRow={selectRowProp}
                                 hover={true}
                                 height='100%'
                                 condensed={this.state.simple}
@@ -478,11 +498,11 @@ let customNew=false;
                                 deleteRow={!this.state.simple}
                                 search={!this.state.simple}
                                 options={this.options}
-                                trClassName={ this.trClassFormat }
-                                multiColumnSearch={ true }
+                                trClassName={this.trClassFormat}
+                                multiColumnSearch={true}
                                 ignoreSinglePage
-                                multiColumnSort={ 2 }
-                                exportCSV={ true }
+                                multiColumnSort={2}
+                                exportCSV={true}
                             >
                                 {cols}
                             </BootstrapTable>
@@ -492,7 +512,8 @@ let customNew=false;
                 </div>
 
             </div>
-    )
+        )
     }
-    }
-    export default FilterTable;
+}
+
+export default FilterTable;
